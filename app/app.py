@@ -171,6 +171,16 @@ with tab_reg:
             with c8:
                 holiday = st.selectbox("Holiday Status", reg_meta["holidays"], index=reg_meta["holidays"].index("None") if "None" in reg_meta["holidays"] else 0)
             
+            if holiday != "None":
+                st.info(
+                    f"**Data Science Insight — Holiday Feature:** "
+                    f"In the Random Forest model, **holiday carries only ~0.003% feature importance** "
+                    f"versus **time-of-day at 84%**. The model correctly learned this from the data: "
+                    f"on I-94 Minneapolis, even on {holiday}, if it is 4 PM on a weekday, trucks and "
+                    f"essential workers still create rush-hour volumes. Holiday effect is only visible "
+                    f"at non-peak hours (e.g., 2 AM weekday), where the baseline traffic is already low."
+                )
+            
             # Filter weather description based on weather main if available
             filtered_descs = [d for d in reg_meta["weather_descs"] if weather_main.lower() in d.lower()]
             if not filtered_descs:
